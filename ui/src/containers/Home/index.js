@@ -246,7 +246,7 @@ export default compose(
   withProps(({ authUser, orgSearch }) => {
     const userOrgs = authUser.get('organisations', new ImmutList());
     const searchFilter = queryStringToQuery(orgSearch, 'organisation');
-    const userFilter = fromJS(userOrgs.length > 20 ? {} : { _id: { $in: userOrgs } });
+    const userFilter = fromJS(userOrgs.size > 50 ? {} : { _id: { $in: userOrgs } });
     const filter = userFilter.merge(searchFilter);
     const sort = fromJS({ name: 1, _id: -1 });
     return { filter, sort };
